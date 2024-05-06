@@ -5,14 +5,13 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-# from webdriver_manager.chrome import ChromeDriverManager
+
 from time import sleep
 import pandas as pd
 import os
 from selenium.webdriver.common.keys import Keys
 
 
-#data
 data = pd.read_csv("/home/bineet/StudentsMess/Codes/Bill_calculation/Bill Sender/AprilFinalBillCalculation - AprilFinalBillCalculation.csv").set_index("Unnamed: 0")
 phone_numbers = pd.read_csv("/home/bineet/StudentsMess/Codes/Bill_calculation/Bill Sender/PhoneDirectory.csv",dtype={"Phone Number":str}).set_index("Registered Email Adress")
 
@@ -145,13 +144,6 @@ def generate_message(test):
         
     return join_and(printable)
 
-# for i in data.index:
-#     try:
-#         print(phone_numbers.loc[i])
-#     except:
-#         print("-------------------------------------",i)
-
-
 
 #
 options = Options()
@@ -179,12 +171,7 @@ print(style.YELLOW + '\nThis is your message-')
 print(style.GREEN + message)
 print("\n" + style.RESET)
 
-# message = quote(message)
-# infomation_dict = {"8908241864":{"name":"Bineet","num_l":90,"total_bill":6000},"9632491363":{"name":"Sudeshna","num_l":90,"total_bill":4000},"9439386943":{"name":"Madhu","num_l":80,"total_bill":4000}}
 
-# numbers = ["8908241864","9439386943","8249418538","9632491363"]
-
-# total_number=len(numbers)
 delay = 30
 print("Installing the latest driver")
 # driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
@@ -203,39 +190,12 @@ for i in data.index:
         print("Doing good")
         number = phone_numbers.loc[i]["Phone Number"]
         name = data.loc[i]["Name"]
-        # total_number_of_breakfasts = data.loc[i]['num_breakfast']
-        # total_number_of_lunch = data.loc[i]['num_lunch']
-        # total_number_of_dinner = data.loc[i]['num_dinner']
-        
-        # total_base_meals = data.loc[i]['base_lunch_meals']
-        # total_number_of_checken = data.loc[i]['chicken_lunch_meals']
-        # total_number_of_fish = data.loc[i]['fish_lunch_meals']
-        # total_number_of_egg = data.loc[i]['egg_lunch_meals']
-        # total_sunday_meals = data.loc[i]['sunday_meal']
+
         
         final_bill = data.loc[i]['Corrected_bill']
         print("Yo")
         
-        # feast = data.loc[i]['special_diet']
-        # if feast == 55:
-        #     feast_data = "This%20time%20you%20only%20had%20Lunch%20on%20the%20feast%20day."
-        # if feast == 180:
-        #     feast_data = "This%20time%20you%20had%20Breakfast%20and%20Dinner%20on%20the%20feast%20day."
-        # if feast == 235:
-        #     feast_data = "This%20time%20you%20had%20Breakfast,%20Lunch%20and%20Dinner%20on%20the%20feast%20day."
-        # if feast == 150:
-        #     feast_data = "This%20time%20you%20only%20had%20Dinner%20on%20the%20feast%20day."
-        # if feast == 85:
-        #     feast_data = "This%20time%20you%20only%20had%20Lunch%20on%20the%20feast%20day."
-        # if feast == 0:
-        #     feast_data = "Sadly%20we%20missed%20the%20feast%20day%20this%20time."
-        
-        
-# sudeshna.datta@ils.res.in,Sudeshna Datta,12,1795,17,5,8,1,2,3,3,180,1975,1975
-# rakeshmohapatra516@gmail.com,Rakesh Mohapatra,13,3420,26,25,14,3,3,5,1,205,3625,3625
-# sharadsingh1406@gmail.com,Sharad Singh,23,3305,29,12,14,3,3,5,4,205,3510,3510
-# prustysubhasish.09@gmail.com,Subhasish Prusty,13,2790,24,15,12,3,3,4,2,235,3025,3025
-        # message ="Sadly%20we%20missed%20the%20feast%20day%20this%20time."
+
         
         # message= f"Hello%20{name},%0a%0aThanks%20for%20avaling%20Students'%20Mess%20for%20the%20month%20of%20july.%20Hope%20you%20are%20doing%20well.%20%0a%0aSummary%20for%20the%20month%20of%20July%202023%0a---------%0a%0aThis%20month%20you%20had%20{total_number_of_breakfasts}%20breakfasts,%20{total_number_of_lunch}%20lunchs%20and%20{total_number_of_dinner}%20dinners.%20%0aThe%20lunch%20includes,%0a{total_base_meals}%20regular%20meals,%0a{total_number_of_checken}%20chicken%20or%20equivallent%20veg%20meals,%0a{total_number_of_fish}%20fish%20or%20equivallent%20veg%20meals,%0a{total_number_of_egg}%20egg%20or%20equivallent%20veg%20meals,%0a{total_sunday_meals}%20sunday%20meals.%0a%0aAlong%20with%20this%20we%20also%20had%20a%20Feast%20this%20month.{feast_data}%20So%20for%20this%20month%20your%20monthly%20bill%20is%20of%20*Rs.{final_bill}*%2F-.%0a%0aPlease%20pay%20the%20bill%20of%20*Rs.{final_bill}*%20on%20or%20before%203rd%20August%20for%20a%20smoother%20running%20of%20the%20mess.%0a%0aUPI%20-%208908241864@kotak%0a%0a%0a%0a%0a(This%20is%20an%20experimental%20feature%20still%20in%20development)"
         Food_eaten = generate_message(data.loc[i])
